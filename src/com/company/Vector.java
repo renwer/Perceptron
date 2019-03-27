@@ -75,7 +75,6 @@ public class Vector {
             return vector;
     }
 
-
     public Vector clone() {
         return new Vector(this.coordinates, this.vectorClass);
     }

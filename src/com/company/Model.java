@@ -22,7 +22,10 @@ public class Model {
 
         System.out.println("Finished reading training set! Training...");
 
-        while (getAccuracy(testingSet) < 97.0) { //proven that it can't go far beyond 97%
+        //It is proven that it can't go far beyond 97% for this particular dataset.
+        //However, if you wish to use it for anything else, just try running it for about 10 000 times with 0.05
+        //learning rate(Also empirically discovered to generate more or less best performance for me).
+        while (getAccuracy(testingSet) < 96.0) {
             for (Vector v : trainingSet) {
                 int expected = vectorClasses.entrySet().stream()
                         .filter(e -> e.getValue().equals(v.getVectorClass()))
@@ -33,8 +36,6 @@ public class Model {
         printPrecisionForClasses();
         System.out.println("Estimated model's accuracy: " + getAccuracy(testingSet));
     }
-
-
 
 
 //    private double findOptimalLearningRate(String trainingSetPath, String testingSetPath) throws Exception {
@@ -59,6 +60,10 @@ public class Model {
 //                .max(Comparator.comparing(e -> e.getValue())).get().getKey();
 //    }
 
+
+    public String classify(Vector v) {
+        return perceptron.activate(v) == 0 ? vectorClasses.get(0) : vectorClasses.get(1);
+    }
 
     private int getDimension(Set<Vector> trainingSet) throws Exception {
         Set<Integer> dimension = new HashSet<>();

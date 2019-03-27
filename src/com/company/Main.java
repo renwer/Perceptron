@@ -2,7 +2,8 @@ package com.company;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
 
@@ -13,6 +14,19 @@ public class Main {
 
         Model model = new Model("training.txt", "training.txt", learningCoefficient);
 
-        //System.out.println(model.classify(new Vector(Arrays.asList(5.0, 5.0, 5.0, 5.0))));
+        while (true) {
+            System.out.println("Please enter a vector to classify: ");
+            String[] vectorString = reader.readLine().replaceAll(" ", "").split(",");
+            try {
+                List<Double> coordinates = new ArrayList<>();
+                for (int i = 0; i < vectorString.length; i++) {
+                    coordinates.add(Double.parseDouble(vectorString[i]));
+                }
+                Vector vector = new Vector(coordinates);
+                System.out.println("Your Iris was classified as: " + model.classify(vector));
+            } catch (Exception e) {
+                System.out.println("Please enter a valid vector for the supplied training set.\nComma-separated ints or doubles, no repeated spaces.");
+            }
+        }
     }
 }
