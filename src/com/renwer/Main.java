@@ -1,4 +1,4 @@
-package com.company;
+package com.renwer;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -9,7 +9,7 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("Please enter the learning coefficient for the perceptron: ");
+        System.out.println("Please enter the learning coefficient for the perceptron (0.05 recommended): ");
         double learningCoefficient = Double.parseDouble(reader.readLine());
 
         Model model = new Model("training.txt", "training.txt", learningCoefficient);
