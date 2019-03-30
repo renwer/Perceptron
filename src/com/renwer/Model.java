@@ -14,7 +14,7 @@ public class Model {
     private Perceptron perceptron;
 
 
-    public Model(String trainingSetPath, String testingSetPath, double learningRate) throws Exception {
+    public Model(String trainingSetPath, String testingSetPath, double learningRate, int epochs) throws Exception {
         this.trainingSet = readDataSet(trainingSetPath);
         this.testingSet = readDataSet(testingSetPath);
         this.vectorClasses = populateVectorClasses(this.trainingSet);
@@ -25,7 +25,8 @@ public class Model {
         //It is proven that it can't go far beyond 97% for this particular dataset.
         //However, if you wish to use it for anything else, just try running it for about 10 000 times with 0.05
         //learning rate(Also empirically discovered to generate more or less best performance for me).
-        while (getAccuracy(testingSet) < 96.0) {
+        //while (getAccuracy(testingSet) < 97.0) {
+        for (int i = 0; i < epochs; i++) {
             for (Vector v : trainingSet) {
                 int expected = vectorClasses.entrySet().stream()
                         .filter(e -> e.getValue().equals(v.getVectorClass()))
@@ -33,6 +34,7 @@ public class Model {
                 perceptron.train(v, expected);
             }
         }
+        //}
         printPrecisionForClasses();
         System.out.println("Estimated model's accuracy: " + getAccuracy(testingSet));
     }

@@ -11,8 +11,10 @@ public class Main {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Please enter the learning coefficient for the perceptron (0.05 recommended): ");
         double learningCoefficient = Double.parseDouble(reader.readLine());
+        System.out.println("Please enter the number of epochs to train: ");
+        int epochs = Integer.parseInt(reader.readLine());
 
-        Model model = new Model("training.txt", "training.txt", learningCoefficient);
+        Model model = new Model("training.txt", "training.txt", learningCoefficient, epochs);
 
         while (true) {
             System.out.println("Please enter a vector to classify: ");
